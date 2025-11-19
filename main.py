@@ -7,7 +7,7 @@ import time
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
-FPS = 300
+FPS = 1000
 
 # Colors
 WHITE = (255, 255, 255)
@@ -27,7 +27,7 @@ MAX_MISSED_EGGS = 3
 # MAX_SCORE = 15
 
 # RL Constants
-EPISODES = 300  # Increase this for actual training
+EPISODES = 200  # Increase this for actual training
 EPSILON = 0.1   # Exploration rate (if not handled inside agents)
 
 
