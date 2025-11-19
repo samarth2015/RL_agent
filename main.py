@@ -7,7 +7,7 @@ import time
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
-FPS = 30
+FPS = 240
 
 # Colors
 WHITE = (255, 255, 255)
@@ -24,10 +24,10 @@ BUCKET_SPEED = 20
 EGG_SPEED = 10
 NUM_CHICKENS = 5
 MAX_MISSED_EGGS = 3
-MAX_SCORE = 30
+MAX_SCORE = 15
 
 # RL Constants
-EPISODES = 100  # Increase this for actual training
+EPISODES = 300  # Increase this for actual training
 EPSILON = 0.1   # Exploration rate (if not handled inside agents)
 
 
@@ -97,10 +97,11 @@ class ChickenGame:
         self.bucket_x = max(0, min(self.bucket_x, SCREEN_WIDTH - BUCKET_WIDTH))
 
         # 2. Spawn Eggs (Randomly based on frames)
-        if self.frame_count % 20 == 0:
-            if random.random() < 0.6: # 60% chance to spawn
-                spawn_x = random.choice(self.chicken_x_positions)
-                self.eggs.append([spawn_x, 50]) # Spawn below chicken
+        # if self.frame_count % 20 == 0:
+        # if random.random() < 0.6: # 60% chance to spawn
+        if len(self.eggs) == 0:
+            spawn_x = random.choice(self.chicken_x_positions)
+            self.eggs.append([spawn_x, 50]) # Spawn below chicken
 
         # 3. Move Eggs & Collision Detection
         for egg in self.eggs[:]:
@@ -116,17 +117,17 @@ class ChickenGame:
             # Check Miss
             elif egg[1] > SCREEN_HEIGHT:
                 self.missed_eggs += 1
-                reward = -5 # Penalty for dropping
+                reward = -50 # Penalty for dropping
                 self.eggs.remove(egg)
 
         # 4. Check Termination
         if self.missed_eggs >= MAX_MISSED_EGGS:
             self.game_over = True
-            reward = -10 # Penalty for losing
+            reward = -200 # Penalty for losing
         
         if self.score >= MAX_SCORE:
             self.game_over = True
-            reward = 20 # Bonus for winning episode
+            reward = 200 # Bonus for winning episode
 
         self.frame_count += 1
         
@@ -169,7 +170,7 @@ class ChickenGame:
 
 
 # from sarsa import SarsaAgent
-# from double_q import DoubleQAgent
+from RL_agent.double_q import DoubleQAgent
 # from deep_q import DeepQAgent
 
 # --- MOCK AGENT FOR TESTING  ---
@@ -200,8 +201,8 @@ def run_algorithm(algorithm_name):
         
     elif algorithm_name == "double_q":
         print("Initializing Double Q-Learning Agent...")
-        # agent = DoubleQAgent(actions)
-        agent = RandomAgent(actions) # Placeholder
+        agent = DoubleQAgent(actions)
+        # agent = RandomAgent(actions) # Placeholder
         
     elif algorithm_name == "deep_q":
         print("Initializing Deep Q-Learning Agent...")
@@ -246,7 +247,7 @@ def run_algorithm(algorithm_name):
 def plot_results(scores, algo_name):
     plt.figure(figsize=(10, 5))
     plt.plot(scores, label=f"{algo_name} Scores")
-    plt.axhline(y=30, color='g', linestyle='--', label="Win Condition (30)")
+    plt.axhline(y=MAX_SCORE, color='g', linestyle='--', label=f"Win Condition {MAX_SCORE} Eggs")
     plt.xlabel("Episode")
     plt.ylabel("Score (Eggs Caught)")
     plt.title(f"Performance of {algo_name}")
@@ -257,7 +258,7 @@ def plot_results(scores, algo_name):
 if __name__ == "__main__":
     # Change this variable to test different files: 
     # Options: "sarsa", "double_q", "deep_q"
-    ALGORITHM_TO_RUN = "sarsa" 
+    ALGORITHM_TO_RUN = "double_q" 
     
     scores, name = run_algorithm(ALGORITHM_TO_RUN)
     plot_results(scores, name)
