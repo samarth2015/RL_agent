@@ -7,7 +7,7 @@ import time
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
-FPS = 240
+FPS = 300
 
 # Colors
 WHITE = (255, 255, 255)
@@ -24,7 +24,7 @@ BUCKET_SPEED = 20
 EGG_SPEED = 10
 NUM_CHICKENS = 5
 MAX_MISSED_EGGS = 3
-MAX_SCORE = 15
+# MAX_SCORE = 15
 
 # RL Constants
 EPISODES = 300  # Increase this for actual training
@@ -125,9 +125,9 @@ class ChickenGame:
             self.game_over = True
             reward = -200 # Penalty for losing
         
-        if self.score >= MAX_SCORE:
-            self.game_over = True
-            reward = 200 # Bonus for winning episode
+        # if self.score >= MAX_SCORE:
+        #     self.game_over = True
+        #     reward = 200 # Bonus for winning episode
 
         self.frame_count += 1
         
@@ -157,7 +157,9 @@ class ChickenGame:
         pygame.draw.rect(self.screen, BLUE, (self.bucket_x, SCREEN_HEIGHT - BUCKET_HEIGHT, BUCKET_WIDTH, BUCKET_HEIGHT))
 
         # UI Info
-        score_text = self.font.render(f"Score: {self.score}/{MAX_SCORE}", True, BLACK)
+        # score_text = self.font.render(f"Score: {self.score}/{MAX_SCORE}", True, BLACK)
+        score_text = self.font.render(f"Score: {self.score}", True, BLACK)
+
         miss_text = self.font.render(f"Missed: {self.missed_eggs}/{MAX_MISSED_EGGS}", True, BLACK)
         self.screen.blit(score_text, (10, 10))
         self.screen.blit(miss_text, (10, 30))
@@ -170,7 +172,7 @@ class ChickenGame:
 
 
 # from sarsa import SarsaAgent
-from RL_agent.double_q import DoubleQAgent
+from double_q import DoubleQAgent
 # from deep_q import DeepQAgent
 
 # --- MOCK AGENT FOR TESTING  ---
@@ -247,7 +249,7 @@ def run_algorithm(algorithm_name):
 def plot_results(scores, algo_name):
     plt.figure(figsize=(10, 5))
     plt.plot(scores, label=f"{algo_name} Scores")
-    plt.axhline(y=MAX_SCORE, color='g', linestyle='--', label=f"Win Condition {MAX_SCORE} Eggs")
+    # plt.axhline(y=MAX_SCORE, color='g', linestyle='--', label=f"Win Condition {MAX_SCORE} Eggs")
     plt.xlabel("Episode")
     plt.ylabel("Score (Eggs Caught)")
     plt.title(f"Performance of {algo_name}")
