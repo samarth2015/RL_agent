@@ -171,9 +171,9 @@ class ChickenGame:
         pygame.quit()
 
 
-# from sarsa import SarsaAgent
+from sarsa import SarsaAgent
 from double_q import DoubleQAgent
-from deep_q import DeepQAgent
+# from deep_q import DeepQAgent
 
 # --- MOCK AGENT FOR TESTING  ---
 class RandomAgent:
@@ -198,8 +198,8 @@ def run_algorithm(algorithm_name):
     
     if algorithm_name == "sarsa":
         print("Initializing SARSA Agent...")
-        # agent = SarsaAgent(actions) 
-        agent = RandomAgent(actions) # Placeholder
+        agent = SarsaAgent(actions) 
+        # agent = RandomAgent(actions) # Placeholder
         
     elif algorithm_name == "double_q":
         print("Initializing Double Q-Learning Agent...")
@@ -208,7 +208,7 @@ def run_algorithm(algorithm_name):
         
     elif algorithm_name == "deep_q":
         print("Initializing Deep Q-Learning Agent...")
-        agent = DeepQAgent(actions)
+        # agent = DeepQAgent(actions)
         # agent = RandomAgent(actions) # Placeholder
         
     else:
@@ -261,6 +261,7 @@ if __name__ == "__main__":
     # Change this variable to test different files: 
     # Options: "sarsa", "double_q", "deep_q"
     # ALGORITHM_TO_RUN = "double_q" 
-    ALGORITHM_TO_RUN = "deep_q"
+    # ALGORITHM_TO_RUN = "deep_q"
+    ALGORITHM_TO_RUN = "sarsa"
     scores, name = run_algorithm(ALGORITHM_TO_RUN)
     plot_results(scores, name)
