@@ -55,16 +55,18 @@ The game is developed using **Pygame**.
 ## 📦 Project Structure
 
     RL_agent/
-    ├── main.py               # Game environment, training loop & algorithm selection
-    ├── sarsa.py              # SARSA implementation
-    ├── double_q.py           # Double Q-Learning implementation
-    ├── deep_q.py             # Deep Q-Network implementation (PyTorch)
-    ├── Figure_1.png          # Learning curve graph (initial version)
-    ├── Figure_2.png          # Combined graph or comparison plot
-    ├── Figure_DeepQN.png     # DQN performance plot
-    ├── Figure_SARSA.png      # SARSA performance plot
-    ├── README.md             # Project documentation
-    └── __pycache__/          # Auto-generated compiled Python files
+    ├── main.py                 # Game environment, step loop & learning episodes
+    ├── sarsa.py                # SARSA reinforcement learning agent
+    ├── double_q.py             # Double Q-Learning reinforcement learning agent
+    ├── deep_q.py               # Deep Q-Network (PyTorch) RL agent
+    ├── plots/                  # Performance graphs generated after training
+    │   ├── Figure_DeepQN.png   # Learning curve of the DQN agent
+    │   ├── Figure_DoubleQ1.png # First Double Q-Learning result (200 episodes)
+    │   ├── Figure_DoubleQ2.png # Extended Double Q-Learning result (~320 episodes)
+    │   └── Figure_SARSA.png    # Learning curve of the SARSA agent
+    ├── README.md               # Project documentation
+    └── __pycache__/            # Auto-generated compiled files
+
 
 ---
 
