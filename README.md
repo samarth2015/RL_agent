@@ -55,7 +55,7 @@ The game is developed using **Pygame**.
 ## 📦 Project Structure
 
     RL_agent/
-    ├── chicken_game.py         # Game environment & training loop
+    ├── main.py                 # Game environment & training loop
     ├── sarsa.py                # SARSA algorithm
     ├── double_q.py             # Double Q-Learning algorithm
     ├── deep_q.py               # DQN implementation (PyTorch)
@@ -74,7 +74,7 @@ Run the following command:
 
 ### 2️⃣ Choose Algorithm
 
-Open `chicken_game.py` and set:
+Open `main.py` and set:
 
     ALGORITHM_TO_RUN = "sarsa"
     # options: "sarsa", "double_q", "deep_q"
@@ -83,7 +83,7 @@ Open `chicken_game.py` and set:
 
 Run:
 
-    python chicken_game.py
+    python main.py
 
 > 💡 Hint: you can disable rendering in the code to speed up training during long runs.
 
@@ -95,7 +95,7 @@ Run:
 |-----------------------|----------------------|-----------|-----------|----------------------------------------------|
 | SARSA                 | Slow                 | Medium    | ~400      | Safe, on-policy learning                     |
 | Double Q-Learning     | Fast after ~150 eps  | Poor      | ~750      | Highest peak but very unstable               |
-| Deep Q-Network (DQN)  | Moderate             | ⭐ High    | ~140      | Most stable and smooth learning curve        |
+| Deep Q-Network (DQN)  | Moderate             | High    | ~140      | Most stable and smooth learning curve        |
 
 - DQN shows the **smoothest** and most stable learning.
 - Double Q-Learning achieves the **highest peak performance** but with large fluctuations.
